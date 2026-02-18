@@ -43,6 +43,7 @@ distro/
 - `UNWANTED_PACKAGES` — blocklist checked by verify.sh
 - `VERIFY_EXTRA_PACKAGES` — expected dependencies verified but not explicitly installed (e.g., gnome-shell)
 - `DOWNLOAD_FILES` — manifest of files downloaded during install (drives preseed late_command)
+- `STAGING_DIR` — temp directory for files fetched by late_command, cleaned up after post-install
 - `POST_INSTALL_LOG`, `POST_INSTALL_MARKER`, `MOZILLA_KEY_PATH`, `FIREFOX_POLICIES_PATH` — paths shared between post-install.sh and verify.sh
 
 **SHA256 integrity**: `distro.gen.ts` computes hashes of all files in `DOWNLOAD_FILES` and bakes
