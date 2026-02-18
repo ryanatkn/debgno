@@ -1,0 +1,25 @@
+{
+	"name": "debgno",
+	"version": "0.0.1",
+	"description": "minimal Debian 13 desktop with GNOME and Wayland",
+	"private": true,
+	"type": "module",
+	"license": "MIT",
+	"engines": {
+		"node": ">=22.15"
+	},
+	"scripts": {
+		"gen": "gro gen"
+	},
+	"devDependencies": {
+		"@fuzdev/fuz_util": "^0.50.1",
+		"@fuzdev/gro": "^0.192.1",
+		"typescript": "^5.9.3"
+	},
+	"prettier": {
+		"useTabs": true,
+		"printWidth": 100,
+		"singleQuote": true,
+		"bracketSpacing": false
+	}
+}

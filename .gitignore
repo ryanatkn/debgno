@@ -1,0 +1,4 @@
+node_modules/
+test/OVMF_VARS.fd
+test/debian-test.qcow2
+distro/preseed-local.cfg
