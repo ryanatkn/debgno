@@ -13,7 +13,7 @@ TypeScript source for all generated installer files. The single entry point is `
 
 1. Add to `PACKAGES` in `config.ts`
 2. Run `gro gen` — the package is automatically included in both `post-install.sh`
-   (install) and `verify.sh` (verification)
+   (install) and `debgno-verify.sh` (verification)
 
 ## Hash Flow
 
@@ -36,7 +36,7 @@ substituted values before the shell sees the script.
 
 - **Chroot scripts** (`post-install.sh`): Use `set -eu` only. `pipefail` triggers
   Debian bug #969949 with ucf in the installer chroot.
-- **Post-boot scripts** (`setup-nvidia.sh`, `setup-tx.sh`): Use `set -euo pipefail`.
+- **Post-boot scripts** (`debgno-setup-nvidia.sh`, `debgno-setup-tx.sh`): Use `set -euo pipefail`.
   These run on the fully installed system where bash works normally.
 
 ## Modules

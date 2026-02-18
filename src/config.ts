@@ -76,9 +76,13 @@ export interface DownloadFile {
 
 export const DOWNLOAD_FILES: Array<DownloadFile> = [
 	{name: 'post-install.sh', dest: '/target/tmp/post-install.sh', executable: true},
-	{name: 'setup-nvidia.sh', dest: '/target/usr/local/bin/setup-nvidia.sh', executable: true},
-	{name: 'setup-tx.sh', dest: '/target/usr/local/bin/setup-tx.sh', executable: true},
-	{name: 'verify.sh', dest: '/target/usr/local/bin/verify.sh', executable: true},
+	{
+		name: 'debgno-setup-nvidia.sh',
+		dest: '/target/usr/local/bin/debgno-setup-nvidia.sh',
+		executable: true,
+	},
+	{name: 'debgno-setup-tx.sh', dest: '/target/usr/local/bin/debgno-setup-tx.sh', executable: true},
+	{name: 'debgno-verify.sh', dest: '/target/usr/local/bin/debgno-verify.sh', executable: true},
 	{name: 'mozilla.sources', dest: `/target${STAGING_DIR}/mozilla.sources`, executable: false},
 	{name: 'mozilla-pin', dest: `/target${STAGING_DIR}/mozilla-pin`, executable: false},
 	{name: 'policies.json', dest: `/target${STAGING_DIR}/policies.json`, executable: false},

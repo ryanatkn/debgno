@@ -26,9 +26,9 @@ distro/
 ├── preseed.cfg          # Debian installer automation (GitHub raw URLs + SHA256 verification)
 ├── preseed-local.cfg    # Local testing variant (10.0.2.2:8000 URLs, gitignored)
 ├── post-install.sh      # Base system setup (fetched via network during install)
-├── setup-nvidia.sh      # Optional NVIDIA driver setup (user runs post-install)
-├── setup-tx.sh          # Optional tx install for dev environment provisioning
-├── verify.sh            # Automated post-install verification
+├── debgno-setup-nvidia.sh # Optional NVIDIA driver setup (user runs post-install)
+├── debgno-setup-tx.sh     # Optional tx install for dev environment provisioning
+├── debgno-verify.sh       # Automated post-install verification
 ├── mozilla.sources      # deb822 APT source for Mozilla
 ├── mozilla-pin          # APT pin for Firefox packages
 └── policies.json        # Firefox policy configuration
@@ -37,14 +37,14 @@ distro/
 **Shared constants** in `config.ts`:
 
 - `BASE_URL` / `LOCAL_URL` — production and QEMU test URL bases
-- `MOZILLA_KEY_HASH` — shared between post-install.sh and verify.sh
-- `GRUB_TIMEOUT` — shared between post-install.sh and verify.sh
-- `PACKAGES` — packages installed during post-install, verified by verify.sh
-- `UNWANTED_PACKAGES` — blocklist checked by verify.sh
+- `MOZILLA_KEY_HASH` — shared between post-install.sh and debgno-verify.sh
+- `GRUB_TIMEOUT` — shared between post-install.sh and debgno-verify.sh
+- `PACKAGES` — packages installed during post-install, verified by debgno-verify.sh
+- `UNWANTED_PACKAGES` — blocklist checked by debgno-verify.sh
 - `VERIFY_EXTRA_PACKAGES` — expected dependencies verified but not explicitly installed (e.g., gnome-shell)
 - `DOWNLOAD_FILES` — manifest of files downloaded during install (drives preseed late_command)
 - `STAGING_DIR` — temp directory for files fetched by late_command, cleaned up after post-install
-- `POST_INSTALL_LOG`, `POST_INSTALL_MARKER`, `MOZILLA_KEY_PATH`, `FIREFOX_POLICIES_PATH` — paths shared between post-install.sh and verify.sh
+- `POST_INSTALL_LOG`, `POST_INSTALL_MARKER`, `MOZILLA_KEY_PATH`, `FIREFOX_POLICIES_PATH` — paths shared between post-install.sh and debgno-verify.sh
 
 **SHA256 integrity**: `distro.gen.ts` computes hashes of all files in `DOWNLOAD_FILES` and bakes
 them into preseed.cfg's late_command. Each downloaded file is verified before execution. If a hash
@@ -88,7 +88,7 @@ The generated shell scripts run inside a Debian installer chroot, which has limi
 - **DEBIAN_FRONTEND=noninteractive** — required to prevent interactive prompts during `apt-get install`.
 - **Busybox utilities** — the d-i environment uses busybox, not GNU coreutils. Use short flags only (e.g., `sha256sum -c -` not `sha256sum -c --quiet -`).
 
-**Post-boot scripts** (`setup-nvidia.sh`, `setup-tx.sh`) run on the fully installed system, not
+**Post-boot scripts** (`debgno-setup-nvidia.sh`, `debgno-setup-tx.sh`) run on the fully installed system, not
 in the chroot, so they can use `set -euo pipefail` and other bash features safely.
 
 ## Workflow
@@ -127,9 +127,9 @@ test, and add back specific missing recommends as explicit installs.
 **Package lists** are defined in `config.ts`:
 
 - `PACKAGES` — explicitly installed packages (desktop, integration, audio, security, tools)
-- `UNWANTED_PACKAGES` — blocklist verified by verify.sh
+- `UNWANTED_PACKAGES` — blocklist verified by debgno-verify.sh
 
-**Explicitly excluded**: See `UNWANTED_PACKAGES` in `config.ts` for the full blocklist (gnome-software, gnome-calendar, gnome-weather, flatpak, snapd, and others). The `verify.sh` blocklist checks for all of these.
+**Explicitly excluded**: See `UNWANTED_PACKAGES` in `config.ts` for the full blocklist (gnome-software, gnome-calendar, gnome-weather, flatpak, snapd, and others). The `debgno-verify.sh` blocklist checks for all of these.
 
 To add a package: add it to `PACKAGES` in `src/config.ts` and run `gro gen`.
 
@@ -139,8 +139,8 @@ To add a package: add it to `PACKAGES` in `src/config.ts` and run `gro gen`.
 - **Secure Boot disabled for NVIDIA** — modules unsigned (Intel/AMD work with Secure Boot enabled)
 - **Trixie (Debian 13, stable release)** — gets security updates, 5-year support
 - **Base install = mesa/nouveau** — works on Intel/AMD/NVIDIA
-- **NVIDIA proprietary = optional** — user runs `setup-nvidia.sh` after first boot
-- **Dev environment = optional** — user runs `setup-tx.sh` to install [tx](https://trillionx.dev), then provisions via `setup_tx/tx.ts`
+- **NVIDIA proprietary = optional** — user runs `debgno-setup-nvidia.sh` after first boot
+- **Dev environment = optional** — user runs `debgno-setup-tx.sh` to install [tx](https://trillionx.dev), then runs their own tx config
 - **Network fetch** — scripts fetched via wget from GitHub raw URLs with SHA256 verification
 - **Firewall on by default** — nftables deny-inbound, allow established/related + loopback + ICMP
 
@@ -155,7 +155,7 @@ checklists, package audit, NVIDIA testing, and hardware matrix. QEMU artifacts
 1. `python3 -m http.server 8000` — serve project files (keep running in a separate terminal)
 2. Boot QEMU VM with Trixie **stable** netinst ISO (not testing/weekly — that's Forky/Debian 14)
 3. At GRUB, append: `auto=true priority=high preseed/url=http://10.0.2.2:8000/distro/preseed-local.cfg`
-4. After install, verify: `sudo verify.sh` (installed to `/usr/local/bin/` during install)
+4. After install, verify: `sudo debgno-verify.sh` (installed to `/usr/local/bin/` during install)
 
 Edits to `src/` are picked up after `gro gen` — the HTTP server serves directly from the project directory.
 

@@ -17,9 +17,9 @@ export const gen: Gen = () => {
 	// Generate all file contents.
 	const contents: Record<string, string> = {
 		'post-install.sh': generate_post_install(config),
-		'setup-nvidia.sh': generate_setup_nvidia(),
-		'setup-tx.sh': generate_setup_tx(),
-		'verify.sh': generate_verify(config),
+		'debgno-setup-nvidia.sh': generate_setup_nvidia(),
+		'debgno-setup-tx.sh': generate_setup_tx(),
+		'debgno-verify.sh': generate_verify(config),
 		'mozilla.sources': generate_mozilla_sources(),
 		'mozilla-pin': generate_mozilla_pin(),
 		'policies.json': generate_policies_json(),

@@ -64,7 +64,7 @@ Works on Intel, AMD, and NVIDIA hardware. NVIDIA proprietary driver is an option
 **Verify the install** (optional):
 
 ```bash
-sudo verify.sh
+sudo debgno-verify.sh
 ```
 
 Base install works immediately on Intel/AMD GPUs.
@@ -72,7 +72,7 @@ Base install works immediately on Intel/AMD GPUs.
 **For NVIDIA GPUs**, run after first boot:
 
 ```bash
-sudo /usr/local/bin/setup-nvidia.sh
+sudo debgno-setup-nvidia.sh
 ```
 
 Then reboot. GDM will offer Wayland session with NVIDIA acceleration.
@@ -82,17 +82,10 @@ Then reboot. GDM will offer Wayland session with NVIDIA acceleration.
 **For dev environment setup** (install [tx](https://trillionx.dev)):
 
 ```bash
-/usr/local/bin/setup-tx.sh
+debgno-setup-tx.sh
 ```
 
-Then set up your full environment:
-
-```bash
-git clone https://github.com/ryanatkn/setup.git ~/dev/setup
-cd ~/dev/setup
-tx apply setup_tx/tx.ts          # preview (dry run)
-tx apply setup_tx/tx.ts --wetrun # execute
-```
+Then run your own tx config to provision your environment.
 
 ## What's Installed
 
@@ -160,14 +153,14 @@ See [docs/testing.md](docs/testing.md) for QEMU testing setup, checklists, and p
 
 ## Files
 
-| File                     | Purpose                                                      |
-| ------------------------ | ------------------------------------------------------------ |
-| `src/distro.gen.ts`      | Single source of truth — generates all installer files       |
-| `distro/preseed.cfg`     | Generated: installer automation with SHA256 verification     |
-| `distro/post-install.sh` | Generated: base system setup (GNOME, Firefox, audio, config) |
-| `distro/setup-nvidia.sh` | Generated: optional NVIDIA driver + Wayland config           |
-| `distro/setup-tx.sh`     | Generated: optional [tx](https://trillionx.dev) install      |
-| `distro/verify.sh`       | Generated: automated post-install verification               |
+| File                            | Purpose                                                      |
+| ------------------------------- | ------------------------------------------------------------ |
+| `src/distro.gen.ts`             | Single source of truth — generates all installer files       |
+| `distro/preseed.cfg`            | Generated: installer automation with SHA256 verification     |
+| `distro/post-install.sh`        | Generated: base system setup (GNOME, Firefox, audio, config) |
+| `distro/debgno-setup-nvidia.sh` | Generated: optional NVIDIA driver + Wayland config           |
+| `distro/debgno-setup-tx.sh`     | Generated: optional [tx](https://trillionx.dev) install      |
+| `distro/debgno-verify.sh`       | Generated: automated post-install verification               |
 
 ## License
 

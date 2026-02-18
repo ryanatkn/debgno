@@ -248,10 +248,10 @@ These catch missing recommends that `--no-install-recommends` may have skipped. 
 
 ### Automated Verification
 
-Run `verify.sh` (installed to `/usr/local/bin/` during install):
+Run `debgno-verify.sh` (installed to `/usr/local/bin/` during install):
 
 ```bash
-sudo verify.sh
+sudo debgno-verify.sh
 ```
 
 Should report all passed, 0 failed.
@@ -261,6 +261,7 @@ Should report all passed, 0 failed.
 - [ ] `/var/lib/post-install-complete` exists
 - [ ] `/var/log/post-install.log` exists and shows no errors
 - [ ] `systemctl status post-install-check.service` shows inactive (ran and disabled itself)
+- [ ] `sudo apt-get update` runs clean after first boot (sqv signature warnings about "Not live until" are a benign clock skew issue — NTP corrects this on first boot; re-run if you see them)
 
 ## NVIDIA Testing (Real Hardware)
 
@@ -272,13 +273,13 @@ Requires actual NVIDIA GPU. Cannot be fully tested in VM without GPU passthrough
 2. Verify desktop works with nouveau
 3. Run NVIDIA setup:
    ```bash
-   sudo /usr/local/bin/setup-nvidia.sh
+   sudo debgno-setup-nvidia.sh
    ```
 4. Reboot
 
 ### Checklist
 
-- [ ] setup-nvidia.sh completes without errors
+- [ ] debgno-setup-nvidia.sh completes without errors
 - [ ] System reboots successfully
 - [ ] GDM offers "GNOME on Wayland" session (not just Xorg)
 - [ ] NVIDIA driver loaded:
@@ -321,12 +322,12 @@ systemctl status nvidia-suspend nvidia-hibernate nvidia-resume
 | Intel (integrated) | Works with base install (mesa) |
 | AMD (integrated/discrete) | Works with base install (mesa/amdgpu) |
 | NVIDIA (nouveau) | Works with base install, no acceleration |
-| NVIDIA (proprietary) | Requires setup-nvidia.sh, full Wayland support |
+| NVIDIA (proprietary) | Requires debgno-setup-nvidia.sh, full Wayland support |
 
 ### Target Test Machines
 
 | Machine | GPU | Driver | Notes |
 |---------|-----|--------|-------|
 | ThinkPad L14 (2023) | Ryzen 5 PRO 7530U + Radeon 520 | mesa/amdgpu | All-AMD, no proprietary needed |
-| NVIDIA desktop | NVIDIA discrete | nvidia-driver via setup-nvidia.sh | Tests pure NVIDIA Wayland path |
+| NVIDIA desktop | NVIDIA discrete | nvidia-driver via debgno-setup-nvidia.sh | Tests pure NVIDIA Wayland path |
 | NVIDIA laptop | Intel iGPU + NVIDIA dGPU | mesa (Intel) + nvidia-driver | Hybrid/Optimus — tests switcheroo offload |

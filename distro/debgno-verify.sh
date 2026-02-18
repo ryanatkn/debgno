@@ -1,7 +1,7 @@
 #!/bin/bash
-# verify.sh — Automated post-install verification
+# debgno-verify.sh — Automated post-install verification
 # Run after install to check packages, configs, and services.
-# Usage: sudo bash verify.sh
+# Usage: sudo debgno-verify.sh
 
 set -u
 

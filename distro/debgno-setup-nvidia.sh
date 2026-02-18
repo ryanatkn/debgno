@@ -1,13 +1,13 @@
 #!/bin/bash
-# setup-nvidia.sh — Optional NVIDIA proprietary driver + Wayland configuration
-# Run manually after first boot: sudo /usr/local/bin/setup-nvidia.sh
+# debgno-setup-nvidia.sh — Optional NVIDIA proprietary driver + Wayland configuration
+# Run manually after first boot: sudo /usr/local/bin/debgno-setup-nvidia.sh
 
 set -euo pipefail
 
 # --- 4a. Check prerequisites ---
 
 if [ "$(id -u)" -ne 0 ]; then
-    echo "Error: must run as root (sudo /usr/local/bin/setup-nvidia.sh)"
+    echo "Error: must run as root (sudo /usr/local/bin/debgno-setup-nvidia.sh)"
     exit 1
 fi
 
@@ -67,5 +67,5 @@ echo "=== Systemd services enabled ==="
 
 update-initramfs -u
 
-echo "=== setup-nvidia.sh complete ==="
+echo "=== debgno-setup-nvidia.sh complete ==="
 echo "NVIDIA setup complete. Reboot to use Wayland with NVIDIA."

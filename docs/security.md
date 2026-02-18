@@ -83,7 +83,7 @@ Unattended-Upgrade::Allowed-Origins {
 ### Minimal Attack Surface
 
 No gnome-software, no flatpak/snap, no remote desktop, no file sharing, no media
-server. Every installed package is an explicit choice. `verify.sh` checks for
+server. Every installed package is an explicit choice. `debgno-verify.sh` checks for
 unexpected listening services.
 
 ### Firefox Hardening
@@ -119,7 +119,7 @@ To switch to strict mode: edit `/etc/systemd/resolved.conf.d/dot.conf` and chang
 ### Mozilla Signing Key Verification
 
 The Mozilla APT signing key is verified by SHA256 hash during install
-(`post-install.sh`) and again during verification (`verify.sh`). The hash is
+(`post-install.sh`) and again during verification (`debgno-verify.sh`). The hash is
 defined once in `src/config.ts` and shared across both scripts.
 
 ## Known Limitations
@@ -167,10 +167,10 @@ possible but adds friction to every boot and recovery scenario.
 
 ### tx Installer
 
-The optional dev environment script (`setup-tx.sh`) installs [tx](https://trillionx.dev)
+The optional dev environment script (`debgno-setup-tx.sh`) installs [tx](https://trillionx.dev)
 via its standard installer. The tx installer verifies its own binary hash after download.
 This is the standard vendor-trust model (like `apt` trusting Debian's repos) and is
-user-initiated — not part of the base install.
+user-initiated — not part of the base install. This requires trusting trillionx.dev to run arbitrary code.
 
 ### WiFi Firmware
 

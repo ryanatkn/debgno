@@ -13,9 +13,9 @@ const format_verify_packages = (packages: Array<string>): string =>
 	packages.map((p) => `    ${p}`).join(' \\\n');
 
 export const generate_verify = (config: DebgnoConfig): string => `#!/bin/bash
-# verify.sh — Automated post-install verification
+# debgno-verify.sh — Automated post-install verification
 # Run after install to check packages, configs, and services.
-# Usage: sudo bash verify.sh
+# Usage: sudo debgno-verify.sh
 
 set -u
 
