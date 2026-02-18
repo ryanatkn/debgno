@@ -1,6 +1,7 @@
 import type {DebgnoConfig} from './config.ts';
 import {
 	PACKAGES,
+	STAGING_DIR,
 	POST_INSTALL_LOG,
 	POST_INSTALL_MARKER,
 	MOZILLA_KEY_PATH,
@@ -67,9 +68,9 @@ progress "Installing Firefox..."
     fi
     rm -f /tmp/mozilla-key.gpg
 
-    # Install APT source and pin (fetched by late_command to /tmp/files/)
-    cp /tmp/files/mozilla.sources /etc/apt/sources.list.d/mozilla.sources
-    cp /tmp/files/mozilla-pin /etc/apt/preferences.d/mozilla
+    # Install APT source and pin (fetched by late_command to ${STAGING_DIR}/)
+    cp ${STAGING_DIR}/mozilla.sources /etc/apt/sources.list.d/mozilla.sources
+    cp ${STAGING_DIR}/mozilla-pin /etc/apt/preferences.d/mozilla
 
     apt-get update
     apt-get install -y firefox
@@ -79,7 +80,7 @@ progress "Installing Firefox..."
     # --- 3c. Firefox policies ---
 
     mkdir -p /etc/firefox/policies
-    cp /tmp/files/policies.json ${FIREFOX_POLICIES_PATH}
+    cp ${STAGING_DIR}/policies.json ${FIREFOX_POLICIES_PATH}
 
     echo "=== Firefox policies installed ==="
 ) || progress "WARNING: Firefox installation failed. Install manually after boot."
@@ -187,7 +188,7 @@ progress "First-boot check service installed"
 # --- 3i. Cleanup ---
 
 apt-get clean
-rm -rf /tmp/post-install.sh /tmp/files
+rm -rf /tmp/post-install.sh ${STAGING_DIR}
 
 touch ${POST_INSTALL_MARKER}
 

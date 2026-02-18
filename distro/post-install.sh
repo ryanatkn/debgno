@@ -78,9 +78,9 @@ progress "Installing Firefox..."
     fi
     rm -f /tmp/mozilla-key.gpg
 
-    # Install APT source and pin (fetched by late_command to /tmp/files/)
-    cp /tmp/files/mozilla.sources /etc/apt/sources.list.d/mozilla.sources
-    cp /tmp/files/mozilla-pin /etc/apt/preferences.d/mozilla
+    # Install APT source and pin (fetched by late_command to /tmp/debgno/)
+    cp /tmp/debgno/mozilla.sources /etc/apt/sources.list.d/mozilla.sources
+    cp /tmp/debgno/mozilla-pin /etc/apt/preferences.d/mozilla
 
     apt-get update
     apt-get install -y firefox
@@ -90,7 +90,7 @@ progress "Installing Firefox..."
     # --- 3c. Firefox policies ---
 
     mkdir -p /etc/firefox/policies
-    cp /tmp/files/policies.json /etc/firefox/policies/policies.json
+    cp /tmp/debgno/policies.json /etc/firefox/policies/policies.json
 
     echo "=== Firefox policies installed ==="
 ) || progress "WARNING: Firefox installation failed. Install manually after boot."
@@ -198,7 +198,7 @@ progress "First-boot check service installed"
 # --- 3i. Cleanup ---
 
 apt-get clean
-rm -rf /tmp/post-install.sh /tmp/files
+rm -rf /tmp/post-install.sh /tmp/debgno
 
 touch /var/lib/post-install-complete
 

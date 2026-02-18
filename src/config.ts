@@ -57,6 +57,9 @@ export const UNWANTED_PACKAGES = [
 	'snapd',
 ];
 
+// Staging directory for files fetched by late_command (used by post-install.sh, cleaned up after).
+export const STAGING_DIR = '/tmp/debgno';
+
 // Paths shared between post-install and verify.
 export const POST_INSTALL_LOG = '/var/log/post-install.log';
 export const POST_INSTALL_MARKER = '/var/lib/post-install-complete';
@@ -76,9 +79,9 @@ export const DOWNLOAD_FILES: Array<DownloadFile> = [
 	{name: 'setup-nvidia.sh', dest: '/target/usr/local/bin/setup-nvidia.sh', executable: true},
 	{name: 'setup-tx.sh', dest: '/target/usr/local/bin/setup-tx.sh', executable: true},
 	{name: 'verify.sh', dest: '/target/usr/local/bin/verify.sh', executable: true},
-	{name: 'mozilla.sources', dest: '/target/tmp/files/mozilla.sources', executable: false},
-	{name: 'mozilla-pin', dest: '/target/tmp/files/mozilla-pin', executable: false},
-	{name: 'policies.json', dest: '/target/tmp/files/policies.json', executable: false},
+	{name: 'mozilla.sources', dest: `/target${STAGING_DIR}/mozilla.sources`, executable: false},
+	{name: 'mozilla-pin', dest: `/target${STAGING_DIR}/mozilla-pin`, executable: false},
+	{name: 'policies.json', dest: `/target${STAGING_DIR}/policies.json`, executable: false},
 ];
 
 export type FileHashes = Record<string, string>;
