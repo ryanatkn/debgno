@@ -125,7 +125,7 @@ tx apply setup_tx/tx.ts --wetrun # execute
 ### Security
 
 - nftables (firewall, default deny-inbound policy — add rules as needed)
-- Updates are manual — run `sudo apt update && sudo apt upgrade` regularly
+- Updates are manual — run `sudo apt update && sudo apt upgrade` regularly, or enable automatic security updates with `sudo apt install unattended-upgrades && sudo dpkg-reconfigure -plow unattended-upgrades`
 
 ### Not Installed (by design)
 
