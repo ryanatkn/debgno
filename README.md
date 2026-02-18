@@ -18,7 +18,6 @@ Start with a clean desktop and add what you need, instead of removing what you d
 - Mainline Firefox from Mozilla APT (not ESR)
 - Full-disk encryption (LUKS)
 - Firewall enabled (nftables, default deny-inbound)
-- SHA256 integrity verification on all downloaded files
 
 Under the hood it's a preseed config and post-install scripts — no custom ISO yet, just automation on top of the standard Debian netinst installer.
 
@@ -149,7 +148,7 @@ flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flat
 
 ## Development
 
-All installer files in `distro/` are generated from TypeScript source in `src/`. The single entry point is `src/files.gen.ts`.
+All installer files in `distro/` are generated from TypeScript source in `src/`. The single entry point is `src/distro.gen.ts`.
 
 ```bash
 npm install          # install dependencies (first time)
@@ -163,7 +162,7 @@ See [docs/testing.md](docs/testing.md) for QEMU testing setup, checklists, and p
 
 | File                     | Purpose                                                      |
 | ------------------------ | ------------------------------------------------------------ |
-| `src/files.gen.ts`       | Single source of truth — generates all installer files       |
+| `src/distro.gen.ts`      | Single source of truth — generates all installer files       |
 | `distro/preseed.cfg`     | Generated: installer automation with SHA256 verification     |
 | `distro/post-install.sh` | Generated: base system setup (GNOME, Firefox, audio, config) |
 | `distro/setup-nvidia.sh` | Generated: optional NVIDIA driver + Wayland config           |

@@ -10,7 +10,7 @@ All installer files are generated from TypeScript source:
 
 ```
 src/
-├── files.gen.ts       # Orchestrator — computes hashes, outputs all generated files
+├── distro.gen.ts       # Orchestrator — computes hashes, outputs all generated files
 ├── config.ts          # Constants, package/verify lists, download manifest, shared paths, DebgnoConfig type
 ├── preseed.ts         # generate_preseed({base_url, hashes}) — late_command from DOWNLOAD_FILES
 ├── post_install.ts    # generate_post_install({mozilla_key_hash, grub_timeout})
@@ -45,7 +45,7 @@ distro/
 - `DOWNLOAD_FILES` — manifest of files downloaded during install (drives preseed late_command)
 - `POST_INSTALL_LOG`, `POST_INSTALL_MARKER`, `MOZILLA_KEY_PATH`, `FIREFOX_POLICIES_PATH` — paths shared between post-install.sh and verify.sh
 
-**SHA256 integrity**: `files.gen.ts` computes hashes of all files in `DOWNLOAD_FILES` and bakes
+**SHA256 integrity**: `distro.gen.ts` computes hashes of all files in `DOWNLOAD_FILES` and bakes
 them into preseed.cfg's late_command. Each downloaded file is verified before execution. If a hash
 doesn't match, the install aborts.
 

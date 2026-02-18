@@ -1,12 +1,12 @@
 # src/
 
-TypeScript source for all generated installer files. The single entry point is `files.gen.ts`.
+TypeScript source for all generated installer files. The single entry point is `distro.gen.ts`.
 
 ## Adding a Generated File
 
 1. Create a generator function in the appropriate module (or a new module)
 2. Add the file to `DOWNLOAD_FILES` in `config.ts` if it's fetched during install
-3. Add the generator call to the `contents` map in `files.gen.ts`
+3. Add the generator call to the `contents` map in `distro.gen.ts`
 4. Run `gro gen` to generate, `gro gen --check` to verify
 
 ## Adding a Package
@@ -17,7 +17,7 @@ TypeScript source for all generated installer files. The single entry point is `
 
 ## Hash Flow
 
-`files.gen.ts` generates all file contents first, computes SHA256 hashes of every file
+`distro.gen.ts` generates all file contents first, computes SHA256 hashes of every file
 in `DOWNLOAD_FILES`, then passes those hashes to `generate_preseed()` which bakes them
 into the late_command. This means preseed.cfg always reflects the exact content of the
 files it will download.
@@ -44,7 +44,7 @@ substituted values before the shell sees the script.
 | Module            | Exports                                                                                                      | Config                                       |
 | ----------------- | ------------------------------------------------------------------------------------------------------------ | -------------------------------------------- |
 | `config.ts`       | Constants, types, `PACKAGES`, `UNWANTED_PACKAGES`, `VERIFY_EXTRA_PACKAGES`, `DOWNLOAD_FILES`, `DebgnoConfig` | —                                            |
-| `files.gen.ts`    | `gen` (Gro entry point)                                                                                      | Orchestrates all generators, computes hashes |
+| `distro.gen.ts`   | `gen` (Gro entry point)                                                                                      | Orchestrates all generators, computes hashes |
 | `preseed.ts`      | `generate_preseed(PreseedConfig)`                                                                            | `{base_url, hashes}`                         |
 | `post_install.ts` | `generate_post_install(DebgnoConfig)`                                                                        | `{mozilla_key_hash, grub_timeout}`           |
 | `verify.ts`       | `generate_verify(DebgnoConfig)`                                                                              | `{mozilla_key_hash, grub_timeout}`           |
