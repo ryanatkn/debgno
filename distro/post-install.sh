@@ -43,11 +43,13 @@ apt-get install -y --no-install-recommends \
     power-profiles-daemon \
     systemd-zram-generator \
     nftables \
+    systemd-timesyncd \
     systemd-resolved \
     git \
     curl \
     wget \
-    ca-certificates
+    ca-certificates \
+    openssh-client
 
 progress "Base packages installed"
 

@@ -24,6 +24,7 @@ export const PACKAGES = [
 	'power-profiles-daemon',
 	'systemd-zram-generator',
 	'nftables',
+	'systemd-timesyncd',
 	'systemd-resolved',
 	'git',
 	'curl',

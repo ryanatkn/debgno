@@ -45,11 +45,13 @@ for pkg in \
     power-profiles-daemon \
     systemd-zram-generator \
     nftables \
+    systemd-timesyncd \
     systemd-resolved \
     git \
     curl \
     wget \
     ca-certificates \
+    openssh-client \
     gnome-shell; do
     check_installed "$pkg"
 done
