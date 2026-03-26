@@ -29,6 +29,7 @@ export const PACKAGES = [
 	'curl',
 	'wget',
 	'ca-certificates',
+	'openssh-client',
 ];
 
 // Expected dependencies not explicitly installed but verified.
