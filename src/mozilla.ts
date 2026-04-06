@@ -56,6 +56,10 @@ export const generate_policies_json = (): string =>
 				SearchEngines: {
 					Default: 'Google',
 				},
+				GenerativeAI: {
+					Enabled: false,
+					Locked: true,
+				},
 				PictureInPicture: {
 					Enabled: false,
 				},
