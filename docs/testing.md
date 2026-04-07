@@ -276,10 +276,18 @@ Requires actual NVIDIA GPU. Cannot be fully tested in VM without GPU passthrough
    sudo debgno-setup-nvidia.sh
    ```
 4. Reboot
+5. If system hangs after LUKS decrypt, recover and re-run with `--late-modeset`:
+   ```bash
+   # Recovery: from GRUB, press 'e', change 'ro quiet' to 'rw init=/bin/bash', Ctrl+X
+   apt purge 'nvidia-*' && update-initramfs -u && sync && reboot -f
+   # After reboot, re-run:
+   sudo debgno-setup-nvidia.sh --late-modeset
+   ```
 
 ### Checklist
 
 - [ ] debgno-setup-nvidia.sh completes without errors
+- [ ] Pre-reboot checks all pass (printed by script)
 - [ ] System reboots successfully
 - [ ] GDM offers "GNOME on Wayland" session (not just Xorg)
 - [ ] NVIDIA driver loaded:
@@ -291,25 +299,32 @@ Requires actual NVIDIA GPU. Cannot be fully tested in VM without GPU passthrough
   ```bash
   lsmod | grep nouveau  # should return nothing
   ```
+- [ ] VA-API working (hardware video decode):
+  ```bash
+  vainfo  # should show NVDEC driver with decode entrypoints
+  ```
 - [ ] Suspend/resume works (close lid or `systemctl suspend`)
 - [ ] Graphics performance reasonable (no obvious stuttering)
+- [ ] Chromium GPU acceleration (if installed):
+  - `chrome://gpu` shows "Video Decode: Hardware accelerated"
+  - GL_RENDERER shows NVIDIA
 
 ### Troubleshooting
+
+If the system **hangs after reboot** (after LUKS decrypt, before login screen):
+this is a known NVIDIA driver timing bug with `nvidia-drm.modeset=1` as a kernel
+parameter. Recover and re-run with `--late-modeset` (see step 5 above).
 
 If GDM only offers Xorg:
 
 ```bash
-# Check kernel params
-cat /proc/cmdline | grep nvidia-drm
-
-# Should show:
-# nvidia-drm.modeset=1 nvidia-drm.fbdev=1
+# Check modeset is enabled
+cat /sys/module/nvidia_drm/parameters/modeset
+# Should show: Y
 
 # Check PreserveVideoMemoryAllocations
 cat /proc/driver/nvidia/params | grep PreserveVideoMemoryAllocations
-
-# Should show:
-# PreserveVideoMemoryAllocations: 1
+# Should show: PreserveVideoMemoryAllocations: 1
 
 # Check systemd services
 systemctl status nvidia-suspend nvidia-hibernate nvidia-resume
@@ -326,8 +341,8 @@ systemctl status nvidia-suspend nvidia-hibernate nvidia-resume
 
 ### Target Test Machines
 
-| Machine | GPU | Driver | Notes |
-|---------|-----|--------|-------|
-| ThinkPad L14 (2023) | Ryzen 5 PRO 7530U + Radeon 520 | mesa/amdgpu | All-AMD, no proprietary needed |
-| NVIDIA desktop | NVIDIA discrete | nvidia-driver via debgno-setup-nvidia.sh | Tests pure NVIDIA Wayland path |
-| NVIDIA laptop | Intel iGPU + NVIDIA dGPU | mesa (Intel) + nvidia-driver | Hybrid/Optimus — tests switcheroo offload |
+| Machine | GPU | Driver | Status | Notes |
+|---------|-----|--------|--------|-------|
+| ThinkPad L14 (2023) | Ryzen 5 PRO 7530U + Radeon 520 | mesa/amdgpu | Untested | All-AMD, no proprietary needed |
+| NVIDIA desktop | RTX 3060 (GA106 Ampere) | nvidia 550.163.01 | **Tested 2026-04-06** | Requires `--late-modeset` (timing bug). Full Wayland + VA-API + Chromium HW decode working. |
+| NVIDIA laptop | Intel iGPU + NVIDIA dGPU | mesa (Intel) + nvidia-driver | Untested | Hybrid/Optimus — tests switcheroo offload |

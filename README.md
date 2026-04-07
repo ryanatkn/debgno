@@ -77,6 +77,9 @@ sudo debgno-setup-nvidia.sh
 
 Then reboot. GDM will offer Wayland session with NVIDIA acceleration.
 
+If the system hangs after reboot (known issue on some hardware — see script header for details),
+recover and re-run with: `sudo debgno-setup-nvidia.sh --late-modeset`
+
 **Hybrid laptops (Intel + NVIDIA):** The script works the same way. After reboot, the Intel iGPU renders the desktop and NVIDIA activates on demand. Right-click an app in GNOME to "Launch with Discrete GPU."
 
 **For dev environment setup** (install [tx](https://trillionx.dev)):
