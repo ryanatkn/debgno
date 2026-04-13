@@ -197,7 +197,25 @@ systemctl enable post-install-check.service
 
 progress "First-boot check service installed"
 
-# --- 3i. Cleanup ---
+# --- 3i. GNOME defaults ---
+
+mkdir -p /etc/dconf/db/local.d
+cat > /etc/dconf/db/local.d/00-debgno << 'EOF'
+[org/gnome/desktop/peripherals/touchpad]
+disable-while-typing=false
+EOF
+
+mkdir -p /etc/dconf/profile
+cat > /etc/dconf/profile/user << 'EOF'
+user-db:user
+system-db:local
+EOF
+
+dconf update
+
+progress "GNOME defaults configured"
+
+# --- 3j. Cleanup ---
 
 apt-get clean
 rm -rf /tmp/post-install.sh /tmp/debgno
