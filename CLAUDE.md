@@ -4,6 +4,11 @@
 
 - every package is an explicit choice
 
+## Committing
+
+`git add` and `git commit` are denied by `.claude/settings.local.json` in
+this repo — make the edits and stop, the user commits.
+
 ## Architecture
 
 All installer files are generated from TypeScript source:
@@ -15,7 +20,7 @@ src/
 ├── preseed.ts         # generate_preseed({base_url, hashes}) — late_command from DOWNLOAD_FILES
 ├── post_install.ts    # generate_post_install({mozilla_key_hash, grub_timeout})
 ├── verify.ts          # generate_verify({mozilla_key_hash, grub_timeout})
-├── setup.ts           # generate_setup_nvidia() + generate_setup_tx()
+├── setup.ts           # generate_setup_nvidia() + generate_setup_zap()
 └── mozilla.ts         # generate_mozilla_sources() + generate_mozilla_pin() + generate_policies_json()
 ```
 
@@ -27,7 +32,7 @@ distro/
 ├── preseed-local.cfg    # Local testing variant (10.0.2.2:8000 URLs, gitignored)
 ├── post-install.sh      # Base system setup (fetched via network during install)
 ├── debgno-setup-nvidia.sh # Optional NVIDIA driver setup (user runs post-install)
-├── debgno-setup-tx.sh     # Optional tx install for dev environment provisioning
+├── debgno-setup-zap.sh     # Optional zap install for dev environment provisioning
 ├── debgno-verify.sh       # Automated post-install verification
 ├── mozilla.sources      # deb822 APT source for Mozilla
 ├── mozilla-pin          # APT pin for Firefox packages
@@ -88,7 +93,7 @@ The generated shell scripts run inside a Debian installer chroot, which has limi
 - **DEBIAN_FRONTEND=noninteractive** — required to prevent interactive prompts during `apt-get install`.
 - **Busybox utilities** — the d-i environment uses busybox, not GNU coreutils. Use short flags only (e.g., `sha256sum -c -` not `sha256sum -c --quiet -`).
 
-**Post-boot scripts** (`debgno-setup-nvidia.sh`, `debgno-setup-tx.sh`) run on the fully installed system, not
+**Post-boot scripts** (`debgno-setup-nvidia.sh`, `debgno-setup-zap.sh`) run on the fully installed system, not
 in the chroot, so they can use `set -euo pipefail` and other bash features safely.
 
 ## Workflow
@@ -102,7 +107,7 @@ in the chroot, so they can use `set -euo pipefail` and other bash features safel
 
 ## Security
 
-See [docs/security.md](docs/security.md) for the full security overview including:
+See ./docs/security.md for the full security overview including:
 
 - SHA256 integrity verification
 - Default deny-inbound firewall (nftables)
@@ -140,13 +145,13 @@ To add a package: add it to `PACKAGES` in `src/config.ts` and run `gro gen`.
 - **Trixie (Debian 13, stable release)** — gets security updates, 5-year support
 - **Base install = mesa/nouveau** — works on Intel/AMD/NVIDIA
 - **NVIDIA proprietary = optional** — user runs `debgno-setup-nvidia.sh` after first boot
-- **Dev environment = optional** — user runs `debgno-setup-tx.sh` to install [tx](https://trillionx.dev), then runs their own tx config
+- **Dev environment = optional** — user runs `debgno-setup-zap.sh` to install [zap](https://zap.fuz.dev), then runs their own zap config
 - **Network fetch** — scripts fetched via wget from GitHub raw URLs with SHA256 verification
 - **Firewall on by default** — nftables deny-inbound, allow established/related + loopback + ICMP
 
 ## Testing
 
-See [docs/testing.md](docs/testing.md) for the full testing guide including QEMU setup,
+See ./docs/testing.md for the full testing guide including QEMU setup,
 checklists, package audit, NVIDIA testing, and hardware matrix. QEMU artifacts
 (disk image, UEFI vars) live in `test/` — see `test/CLAUDE.md` for setup details.
 

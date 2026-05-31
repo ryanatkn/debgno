@@ -83,7 +83,11 @@ export const DOWNLOAD_FILES: Array<DownloadFile> = [
 		dest: '/target/usr/local/bin/debgno-setup-nvidia.sh',
 		executable: true,
 	},
-	{name: 'debgno-setup-tx.sh', dest: '/target/usr/local/bin/debgno-setup-tx.sh', executable: true},
+	{
+		name: 'debgno-setup-zap.sh',
+		dest: '/target/usr/local/bin/debgno-setup-zap.sh',
+		executable: true,
+	},
 	{name: 'debgno-verify.sh', dest: '/target/usr/local/bin/debgno-verify.sh', executable: true},
 	{name: 'mozilla.sources', dest: `/target${STAGING_DIR}/mozilla.sources`, executable: false},
 	{name: 'mozilla-pin', dest: `/target${STAGING_DIR}/mozilla-pin`, executable: false},

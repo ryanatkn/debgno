@@ -36,7 +36,7 @@ substituted values before the shell sees the script.
 
 - **Chroot scripts** (`post-install.sh`): Use `set -eu` only. `pipefail` triggers
   Debian bug #969949 with ucf in the installer chroot.
-- **Post-boot scripts** (`debgno-setup-nvidia.sh`, `debgno-setup-tx.sh`): Use `set -euo pipefail`.
+- **Post-boot scripts** (`debgno-setup-nvidia.sh`, `debgno-setup-zap.sh`): Use `set -euo pipefail`.
   These run on the fully installed system where bash works normally.
 
 ## Modules
@@ -48,5 +48,5 @@ substituted values before the shell sees the script.
 | `preseed.ts`      | `generate_preseed(PreseedConfig)`                                                                            | `{base_url, hashes}`                         |
 | `post_install.ts` | `generate_post_install(DebgnoConfig)`                                                                        | `{mozilla_key_hash, grub_timeout}`           |
 | `verify.ts`       | `generate_verify(DebgnoConfig)`                                                                              | `{mozilla_key_hash, grub_timeout}`           |
-| `setup.ts`        | `generate_setup_nvidia()`, `generate_setup_tx()`                                                             | No config (standalone)                       |
+| `setup.ts`        | `generate_setup_nvidia()`, `generate_setup_zap()`                                                            | No config (standalone)                       |
 | `mozilla.ts`      | `generate_mozilla_sources()`, `generate_mozilla_pin()`, `generate_policies_json()`                           | No config (standalone)                       |

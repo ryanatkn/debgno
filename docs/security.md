@@ -165,12 +165,12 @@ boot parameters (e.g., `init=/bin/sh` for a root shell). LUKS encryption protect
 data at rest, but the boot chain itself is unprotected. Adding a GRUB password is
 possible but adds friction to every boot and recovery scenario.
 
-### tx Installer
+### zap Installer
 
-The optional dev environment script (`debgno-setup-tx.sh`) installs [tx](https://trillionx.dev)
-via its standard installer. The tx installer verifies its own binary hash after download.
+The optional dev environment script (`debgno-setup-zap.sh`) installs [zap](https://zap.fuz.dev)
+via its standard installer. The zap installer verifies its own binary hash after download.
 This is the standard vendor-trust model (like `apt` trusting Debian's repos) and is
-user-initiated — not part of the base install. This requires trusting trillionx.dev to run arbitrary code.
+user-initiated — not part of the base install. This requires trusting zap.fuz.dev to run arbitrary code.
 
 ### WiFi Firmware
 

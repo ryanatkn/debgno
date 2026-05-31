@@ -4,7 +4,7 @@ import type {Gen} from '@fuzdev/gro';
 
 import {BASE_URL, LOCAL_URL, MOZILLA_KEY_HASH, GRUB_TIMEOUT, DOWNLOAD_FILES} from './config.ts';
 import {generate_mozilla_sources, generate_mozilla_pin, generate_policies_json} from './mozilla.ts';
-import {generate_setup_nvidia, generate_setup_tx} from './setup.ts';
+import {generate_setup_nvidia, generate_setup_zap} from './setup.ts';
 import {generate_post_install} from './post_install.ts';
 import {generate_verify} from './verify.ts';
 import {generate_preseed} from './preseed.ts';
@@ -18,7 +18,7 @@ export const gen: Gen = () => {
 	const contents: Record<string, string> = {
 		'post-install.sh': generate_post_install(config),
 		'debgno-setup-nvidia.sh': generate_setup_nvidia(),
-		'debgno-setup-tx.sh': generate_setup_tx(),
+		'debgno-setup-zap.sh': generate_setup_zap(),
 		'debgno-verify.sh': generate_verify(config),
 		'mozilla.sources': generate_mozilla_sources(),
 		'mozilla-pin': generate_mozilla_pin(),

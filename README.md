@@ -82,13 +82,13 @@ recover and re-run with: `sudo debgno-setup-nvidia.sh --late-modeset`
 
 **Hybrid laptops (Intel + NVIDIA):** The script works the same way. After reboot, the Intel iGPU renders the desktop and NVIDIA activates on demand. Right-click an app in GNOME to "Launch with Discrete GPU."
 
-**For dev environment setup** (install [tx](https://trillionx.dev)):
+**For dev environment setup** (install [zap](https://zap.fuz.dev)):
 
 ```bash
-debgno-setup-tx.sh
+debgno-setup-zap.sh
 ```
 
-Then run your own tx config to provision your environment.
+Then run your own zap config to provision your environment.
 
 ## What's Installed
 
@@ -116,7 +116,7 @@ Then run your own tx config to provision your environment.
 - uBlock Origin (auto-installed via policy)
 - AI/ML features disabled, telemetry disabled, HTTPS-only
 - DNS over HTTPS (Cloudflare), tracking protection locked on
-- See [docs/security.md](docs/security.md) for full policy list
+- See ./docs/security.md for full policy list
 
 ### Security
 
@@ -152,7 +152,7 @@ gro gen              # regenerate all files
 gro gen --check      # verify files match source (CI-friendly)
 ```
 
-See [docs/testing.md](docs/testing.md) for QEMU testing setup, checklists, and package audit procedures.
+See ./docs/testing.md for QEMU testing setup, checklists, and package audit procedures.
 
 ## Files
 
@@ -162,7 +162,7 @@ See [docs/testing.md](docs/testing.md) for QEMU testing setup, checklists, and p
 | `distro/preseed.cfg`            | Generated: installer automation with SHA256 verification     |
 | `distro/post-install.sh`        | Generated: base system setup (GNOME, Firefox, audio, config) |
 | `distro/debgno-setup-nvidia.sh` | Generated: optional NVIDIA driver + Wayland config           |
-| `distro/debgno-setup-tx.sh`     | Generated: optional [tx](https://trillionx.dev) install      |
+| `distro/debgno-setup-zap.sh`    | Generated: optional [zap](https://zap.fuz.dev) install       |
 | `distro/debgno-verify.sh`       | Generated: automated post-install verification               |
 
 ## License
