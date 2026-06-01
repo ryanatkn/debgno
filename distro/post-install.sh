@@ -108,8 +108,15 @@ update-grub
 progress "GRUB timeout configured"
 
 # --- 3e. Swap (zram) ---
-# systemd-zram-generator creates compressed in-memory swap on boot.
-# Default: min(50% RAM, 4GiB). Complements the disk swap from LVM for hibernate.
+# systemd-zram-generator creates compressed in-memory swap on boot, but only when
+# a config file is present — the package ships no enabled default. This sets
+# min(50% RAM, 4GiB) with zstd. Complements the disk swap from LVM for hibernate.
+
+cat > /etc/systemd/zram-generator.conf << 'EOF'
+[zram0]
+zram-size = min(ram / 2, 4096)
+compression-algorithm = zstd
+EOF
 
 progress "zram swap configured"
 

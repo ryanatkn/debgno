@@ -83,6 +83,9 @@ d-i partman/confirm_nooverwrite boolean true
 # Disk selection: unpreseeded — auto-selects on single-disk, prompts on multi-disk
 
 # --- Package selection: minimal ---
+# Empty multiselect deselects every task (including "standard system utilities"),
+# and pkgsel/include adds nothing — post-install.sh installs the explicit package
+# set instead, so nothing sneaks in via tasksel.
 tasksel tasksel/first multiselect
 d-i pkgsel/include string
 d-i pkgsel/upgrade select full-upgrade

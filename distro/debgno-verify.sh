@@ -175,6 +175,19 @@ else
     fail "GRUB boot-speed.cfg missing"
 fi
 
+# zram swap
+if [ -f /etc/systemd/zram-generator.conf ]; then
+    pass "zram-generator config exists"
+else
+    fail "zram-generator config missing"
+fi
+
+if grep -q zram /proc/swaps 2>/dev/null; then
+    pass "zram swap active"
+else
+    warn "zram swap not active (check 'swapon --show' / 'zramctl')"
+fi
+
 # Post-install completion marker
 if [ -f /var/lib/post-install-complete ]; then
     pass "Post-install completion marker exists"

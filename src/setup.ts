@@ -160,8 +160,8 @@ echo "=== Pre-reboot checks ==="
 
 CHECKS_OK=true
 
-# Nouveau blacklisted
-if grep -q 'blacklist nouveau' /etc/modprobe.d/blacklist-nouveau.conf 2>/dev/null; then
+# Nouveau blacklisted (by the package's nvidia-blacklists-nouveau.conf or our fallback)
+if grep -rqs 'blacklist nouveau' /etc/modprobe.d/; then
     echo "  [OK] Nouveau blacklisted"
 else
     echo "  [FAIL] Nouveau not blacklisted"

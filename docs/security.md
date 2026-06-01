@@ -36,8 +36,8 @@ table inet filter {
         ct state invalid drop;
         ct state established,related accept;
         iif "lo" accept;
-        icmp accept;
-        icmpv6 accept;
+        meta l4proto icmp accept;
+        meta l4proto ipv6-icmp accept;
     }
     chain forward { policy drop; }
     chain output { policy accept; }
@@ -121,6 +121,11 @@ To switch to strict mode: edit `/etc/systemd/resolved.conf.d/dot.conf` and chang
 The Mozilla APT signing key is verified by SHA256 hash during install
 (`post-install.sh`) and again during verification (`debgno-verify.sh`). The hash is
 defined once in `src/config.ts` and shared across both scripts.
+
+Pinning the hash means key rotation is an expected maintenance event: when Mozilla
+rotates the signing key, the Firefox section of `post-install.sh` fails soft (the
+install completes without a browser) and `debgno-verify.sh` fails hard — update
+`MOZILLA_KEY_HASH` in `src/config.ts` and run `gro gen` to recover.
 
 ## Known Limitations
 
