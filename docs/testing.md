@@ -195,6 +195,11 @@ firefox --version
 # Check policies are applied
 # Open Firefox, navigate to about:policies
 # Should show: DisableTelemetry, DisablePocket, DNSOverHTTPS, etc.
+
+# Check the new tab page (open a new tab)
+# Should show: search, shortcuts, and bookmarks (up to 4 rows) under Recent activity
+# Should NOT show: widgets (lists/timer), weather, sponsored shortcuts,
+#   recommended stories, visited pages, downloads, or "Support Firefox" messages
 ```
 
 ### Verify Security

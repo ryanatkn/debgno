@@ -70,6 +70,9 @@ export const generate_policies_json = (): string =>
 					SponsoredTopSites: false,
 					Pocket: false,
 					SponsoredPocket: false,
+					Stories: false,
+					SponsoredStories: false,
+					Snippets: false,
 					Highlights: true,
 					Locked: true,
 				},
@@ -83,8 +86,20 @@ export const generate_policies_json = (): string =>
 				Preferences: {
 					'browser.ml.enable': {Value: false, Status: 'locked'},
 					'browser.newtabpage.activity-stream.showWeather': {Value: false, Status: 'locked'},
-					'browser.newtabpage.activity-stream.section.highlights.includeDownloadedFiles': {
+					'browser.newtabpage.activity-stream.widgets.system.enabled': {
 						Value: false,
+						Status: 'locked',
+					},
+					'browser.newtabpage.activity-stream.section.highlights.includeVisited': {
+						Value: false,
+						Status: 'default',
+					},
+					'browser.newtabpage.activity-stream.section.highlights.includeDownloads': {
+						Value: false,
+						Status: 'default',
+					},
+					'browser.newtabpage.activity-stream.section.highlights.includeBookmarks': {
+						Value: true,
 						Status: 'default',
 					},
 					'browser.newtabpage.activity-stream.section.highlights.rows': {

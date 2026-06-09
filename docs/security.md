@@ -99,7 +99,7 @@ Policies enforced via `/etc/firefox/policies/policies.json`:
 - Search suggestions disabled
 - Breached password alerts disabled (avoids cloud password checks)
 - uBlock Origin auto-installed via extension policy
-- Home page: no weather, no sponsored content, no recommended stories
+- New tab page: widgets (lists/timer), weather, sponsored shortcuts, and messages/snippets disabled; recent activity limited to bookmarks (4 rows), no visited pages or downloads
 
 ### DNS-over-TLS (System-Wide)
 
