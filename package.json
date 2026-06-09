@@ -12,8 +12,8 @@
 		"gen": "gro gen"
 	},
 	"devDependencies": {
-		"@fuzdev/fuz_util": "^0.63.0",
-		"@fuzdev/gro": "^0.200.0",
+		"@fuzdev/fuz_util": "^0.65.1",
+		"@fuzdev/gro": "^0.204.0",
 		"typescript": "^5.9.3"
 	},
 	"prettier": {
