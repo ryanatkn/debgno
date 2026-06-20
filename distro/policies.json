@@ -40,11 +40,24 @@
       "StartPage": "previous-session"
     },
     "SearchEngines": {
-      "Default": "Google"
+      "Default": "DuckDuckGo",
+      "Remove": [
+        "Google",
+        "Amazon.com",
+        "Bing",
+        "eBay",
+        "Perplexity"
+      ]
     },
     "GenerativeAI": {
       "Enabled": false,
-      "Locked": true
+      "Locked": false
+    },
+    "AIControls": {
+      "Default": {
+        "Value": "blocked",
+        "Locked": false
+      }
     },
     "PictureInPicture": {
       "Enabled": false
@@ -53,14 +66,8 @@
     "FirefoxHome": {
       "Search": true,
       "TopSites": true,
-      "SponsoredTopSites": false,
-      "Pocket": false,
-      "SponsoredPocket": false,
-      "Stories": false,
-      "SponsoredStories": false,
-      "Snippets": false,
       "Highlights": true,
-      "Locked": true
+      "Locked": false
     },
     "ExtensionSettings": {
       "uBlock0@raymondhill.net": {
@@ -71,15 +78,35 @@
     "Preferences": {
       "browser.ml.enable": {
         "Value": false,
-        "Status": "locked"
+        "Status": "default"
       },
       "browser.newtabpage.activity-stream.showWeather": {
         "Value": false,
-        "Status": "locked"
+        "Status": "default"
       },
       "browser.newtabpage.activity-stream.widgets.system.enabled": {
         "Value": false,
+        "Status": "default"
+      },
+      "browser.newtabpage.activity-stream.feeds.snippets": {
+        "Value": false,
+        "Status": "default"
+      },
+      "browser.newtabpage.activity-stream.showSponsoredTopSites": {
+        "Value": false,
         "Status": "locked"
+      },
+      "browser.newtabpage.activity-stream.showSponsored": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "browser.newtabpage.activity-stream.feeds.section.topstories": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "browser.newtabpage.activity-stream.topSitesRows": {
+        "Value": 3,
+        "Status": "default"
       },
       "browser.newtabpage.activity-stream.section.highlights.includeVisited": {
         "Value": false,

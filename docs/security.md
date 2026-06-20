@@ -94,12 +94,13 @@ Policies enforced via `/etc/firefox/policies/policies.json`:
 - DNS over HTTPS (Cloudflare, locked)
 - Tracking protection with cryptomining + fingerprinting (locked)
 - Pocket, Firefox Accounts, sponsored suggestions disabled
-- All AI/ML features disabled (`browser.ml.enable`, locked)
+- AI/ML features off by default but user-changeable (none locked): `AIControls` umbrella ("Block AI enhancements") set to blocked, with `GenerativeAI` and `browser.ml.enable` also default-off
 - Picture-in-Picture disabled
 - Search suggestions disabled
 - Breached password alerts disabled (avoids cloud password checks)
+- Default search engine set to DuckDuckGo; Google, Amazon, Bing, eBay, and Perplexity removed (DuckDuckGo and Wikipedia kept)
 - uBlock Origin auto-installed via extension policy
-- New tab page: widgets (lists/timer), weather, sponsored shortcuts, and messages/snippets disabled; recent activity limited to bookmarks (4 rows), no visited pages or downloads
+- New tab page: search and shortcuts (3 rows) on by default; weather, widgets (lists/timer), and "Support Firefox" messages off by default — all user-toggleable. Sponsored shortcuts/stories and recommended stories (Pocket) stay locked off. Recent activity limited to bookmarks (4 rows), no visited pages or downloads
 
 ### DNS-over-TLS (System-Wide)
 

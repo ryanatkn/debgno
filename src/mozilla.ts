@@ -54,27 +54,38 @@ export const generate_policies_json = (): string =>
 					StartPage: 'previous-session',
 				},
 				SearchEngines: {
-					Default: 'Google',
+					Default: 'DuckDuckGo',
+					// exact display names from search-config-v2; DuckDuckGo (default) and
+					// Wikipedia (en) are kept
+					Remove: ['Google', 'Amazon.com', 'Bing', 'eBay', 'Perplexity'],
 				},
 				GenerativeAI: {
 					Enabled: false,
-					Locked: true,
+					Locked: false,
+				},
+				// umbrella "Block AI enhancements" switch — AI blocked by default but left
+				// unlocked so users can re-enable (incl. on-device translations); pairs with
+				// GenerativeAI/browser.ml.enable, which are likewise default-off, not forced
+				AIControls: {
+					Default: {
+						Value: 'blocked',
+						Locked: false,
+					},
 				},
 				PictureInPicture: {
 					Enabled: false,
 				},
 				SearchSuggestEnabled: false,
+				// section-wide lock relaxed so Search and Shortcuts stay user-toggleable
+				// (both default on). Weather and the privacy-sensitive feeds (sponsored,
+				// stories, snippets/"Support Firefox" messages) are handled via
+				// Preferences below — weather uses the showWeather pref rather than the
+				// FirefoxHome.Weather policy key, which only exists in Firefox 152+
 				FirefoxHome: {
 					Search: true,
 					TopSites: true,
-					SponsoredTopSites: false,
-					Pocket: false,
-					SponsoredPocket: false,
-					Stories: false,
-					SponsoredStories: false,
-					Snippets: false,
 					Highlights: true,
-					Locked: true,
+					Locked: false,
 				},
 				ExtensionSettings: {
 					'uBlock0@raymondhill.net': {
@@ -84,12 +95,30 @@ export const generate_policies_json = (): string =>
 					},
 				},
 				Preferences: {
-					'browser.ml.enable': {Value: false, Status: 'locked'},
-					'browser.newtabpage.activity-stream.showWeather': {Value: false, Status: 'locked'},
+					'browser.ml.enable': {Value: false, Status: 'default'},
+					// new tab content — off by default but left user-toggleable, not forced:
+					// weather (showWeather is version-independent, unlike the FirefoxHome.Weather
+					// policy key which is Firefox 152+ only), widgets (lists/timer/clock), and
+					// snippets/"Support Firefox" messages
+					'browser.newtabpage.activity-stream.showWeather': {Value: false, Status: 'default'},
 					'browser.newtabpage.activity-stream.widgets.system.enabled': {
+						Value: false,
+						Status: 'default',
+					},
+					'browser.newtabpage.activity-stream.feeds.snippets': {Value: false, Status: 'default'},
+					// sponsored content stays locked off; recommended stories are also held
+					// off here and via DisablePocket above
+					'browser.newtabpage.activity-stream.showSponsoredTopSites': {
 						Value: false,
 						Status: 'locked',
 					},
+					'browser.newtabpage.activity-stream.showSponsored': {Value: false, Status: 'locked'},
+					'browser.newtabpage.activity-stream.feeds.section.topstories': {
+						Value: false,
+						Status: 'locked',
+					},
+					// shortcuts rows: 3 (default 1), left user-changeable
+					'browser.newtabpage.activity-stream.topSitesRows': {Value: 3, Status: 'default'},
 					'browser.newtabpage.activity-stream.section.highlights.includeVisited': {
 						Value: false,
 						Status: 'default',

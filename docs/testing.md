@@ -194,12 +194,15 @@ firefox --version
 
 # Check policies are applied
 # Open Firefox, navigate to about:policies
-# Should show: DisableTelemetry, DisablePocket, DNSOverHTTPS, etc.
+# Should show: DisableTelemetry, DisablePocket, DNSOverHTTPS, SearchEngines, AIControls, etc.
+
+# Default search engine should be DuckDuckGo (Settings -> Search); no Google/Amazon/Bing/eBay/Perplexity (Wikipedia kept)
 
 # Check the new tab page (open a new tab)
-# Should show: search, shortcuts, and bookmarks (up to 4 rows) under Recent activity
-# Should NOT show: widgets (lists/timer), weather, sponsored shortcuts,
-#   recommended stories, visited pages, downloads, or "Support Firefox" messages
+# Should show: search and shortcuts (3 rows) plus bookmarks (up to 4 rows) under Recent activity
+# Off by default but user-toggleable: weather, widgets (lists/timer), "Support Firefox" messages
+# Force-disabled (locked): sponsored shortcuts, sponsored stories, recommended stories (Pocket)
+# Recent activity shows bookmarks only — no visited pages or downloads
 ```
 
 ### Verify Security
