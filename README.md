@@ -21,12 +21,13 @@ Start with a clean desktop and add what you need, instead of removing what you d
 
 Under the hood it's a preseed config and post-install scripts — no custom ISO yet, just automation on top of the standard Debian netinst installer.
 
-Works on Intel, AMD, and NVIDIA hardware. NVIDIA proprietary driver is an optional post-install step.
+Works on Intel, AMD, and NVIDIA hardware. NVIDIA's open kernel module driver (Turing or newer) is an optional post-install step.
 
 ## Requirements
 
 - UEFI system (BIOS not supported)
 - Secure Boot disabled if using NVIDIA (Intel/AMD work with Secure Boot enabled)
+- NVIDIA only: the optional accelerated driver needs a Turing-or-newer GPU (RTX 20-series / GTX 16-series and up); older cards run on nouveau from the base install
 - Network connection during install
 - ~20GB disk minimum
 
@@ -74,6 +75,8 @@ Base install works immediately on Intel/AMD GPUs.
 ```bash
 sudo debgno-setup-nvidia.sh
 ```
+
+This installs NVIDIA's open kernel module driver, which needs a **Turing or newer GPU** (RTX 20-series / GTX 16-series and up — every RTX card qualifies). Check yours with `lspci -nn | grep -iE 'vga|3d'`; pre-Turing cards (GTX 10-series Pascal and older) aren't supported by the open module and would need the proprietary driver instead.
 
 Then reboot. GDM will offer Wayland session with NVIDIA acceleration.
 

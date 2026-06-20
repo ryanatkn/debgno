@@ -1,5 +1,5 @@
 export const generate_setup_nvidia = (): string => `#!/bin/bash
-# debgno-setup-nvidia.sh — Optional NVIDIA proprietary driver + Wayland configuration
+# debgno-setup-nvidia.sh — Optional NVIDIA open kernel module driver + Wayland configuration
 # Run manually after first boot: sudo /usr/local/bin/debgno-setup-nvidia.sh
 #
 # KNOWN ISSUE: On some hardware (confirmed: RTX 3060 + driver 550.x + kernel 6.12),
@@ -17,7 +17,7 @@ export const generate_setup_nvidia = (): string => `#!/bin/bash
 # systemd service that reloads nvidia-drm with modeset=1 late in boot. This is
 # safer but non-standard. Use it only if the default approach hangs.
 #
-# Full documentation: ~/dev/setup/linux/README.md "NVIDIA Proprietary Drivers"
+# Full documentation: ~/dev/setup/linux/README.md "NVIDIA Drivers"
 
 set -euo pipefail
 
@@ -52,10 +52,22 @@ fi
 
 export DEBIAN_FRONTEND=noninteractive
 
-echo "=== Installing NVIDIA proprietary driver ==="
+echo "=== Installing NVIDIA open kernel module driver ==="
 
 # --- 4b. Install kernel headers + NVIDIA packages ---
 # Headers are required for DKMS to build the nvidia kernel module.
+#
+# nvidia-open-kernel-dkms builds NVIDIA's official open-source GPU kernel modules
+# (github.com/NVIDIA/open-gpu-kernel-modules) instead of the proprietary module. It
+# satisfies nvidia-driver's kernel-module dependency via the nvidia-open-kernel-*
+# alternative, so the proprietary nvidia-kernel-dkms is never pulled in. The userspace
+# driver (nvidia-driver) is identical either way. The open module auto-pulls
+# firmware-nvidia-gsp from non-free-firmware (enabled during the debgno install).
+#
+# Requires a Turing or newer GPU (RTX 20-series / GTX 16-series and up). Pre-Turing
+# cards (GTX 10-series Pascal and older) are NOT supported by the open module — those
+# need the proprietary nvidia-kernel-dkms instead.
+#
 # Intentionally no --no-install-recommends: NVIDIA recommends (nvidia-settings,
 # nvidia-persistenced, etc.) are useful for a desktop setup.
 
@@ -63,6 +75,7 @@ apt-get update
 apt-get install -y \\
     linux-headers-\$(uname -r) \\
     nvidia-driver \\
+    nvidia-open-kernel-dkms \\
     nvidia-vaapi-driver \\
     vainfo \\
     nvtop

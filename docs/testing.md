@@ -345,12 +345,12 @@ systemctl status nvidia-suspend nvidia-hibernate nvidia-resume
 | Intel (integrated) | Works with base install (mesa) |
 | AMD (integrated/discrete) | Works with base install (mesa/amdgpu) |
 | NVIDIA (nouveau) | Works with base install, no acceleration |
-| NVIDIA (proprietary) | Requires debgno-setup-nvidia.sh, full Wayland support |
+| NVIDIA (open kernel module) | Requires debgno-setup-nvidia.sh (Turing+), full Wayland support |
 
 ### Target Test Machines
 
 | Machine | GPU | Driver | Status | Notes |
 |---------|-----|--------|--------|-------|
-| ThinkPad L14 (2023) | Ryzen 5 PRO 7530U + Radeon 520 | mesa/amdgpu | Untested | All-AMD, no proprietary needed |
+| ThinkPad L14 (2023) | Ryzen 5 PRO 7530U + Radeon 520 | mesa/amdgpu | Untested | All-AMD, no NVIDIA setup needed |
 | NVIDIA desktop | RTX 3060 (GA106 Ampere) | nvidia 550.163.01 | **Tested 2026-04-06** | Requires `--late-modeset` (timing bug). Full Wayland + VA-API + Chromium HW decode working. |
 | NVIDIA laptop | Intel iGPU + NVIDIA dGPU | mesa (Intel) + nvidia-driver | Untested | Hybrid/Optimus — tests switcheroo offload |

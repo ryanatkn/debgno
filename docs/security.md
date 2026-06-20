@@ -155,8 +155,9 @@ block the desktop install) but means that specific failure path is non-fatal.
 
 ### No Secure Boot with NVIDIA
 
-NVIDIA kernel modules are unsigned. Secure Boot must be disabled for the proprietary
-driver. Intel/AMD systems can keep Secure Boot enabled.
+NVIDIA kernel modules are built locally via DKMS and left unsigned (this is true of
+the open kernel modules as well as the proprietary ones). Secure Boot must be disabled
+to load them. Intel/AMD systems can keep Secure Boot enabled.
 
 ### mDNS Blocked
 

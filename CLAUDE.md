@@ -144,7 +144,7 @@ To add a package: add it to `PACKAGES` in `src/config.ts` and run `gro gen`.
 - **Secure Boot disabled for NVIDIA** — modules unsigned (Intel/AMD work with Secure Boot enabled)
 - **Trixie (Debian 13, stable release)** — gets security updates, 5-year support
 - **Base install = mesa/nouveau** — works on Intel/AMD/NVIDIA
-- **NVIDIA proprietary = optional** — user runs `debgno-setup-nvidia.sh` after first boot
+- **NVIDIA open kernel module = optional** — user runs `debgno-setup-nvidia.sh` after first boot (installs `nvidia-open-kernel-dkms`; Turing or newer GPUs only)
 - **Dev environment = optional** — user runs `debgno-setup-zap.sh` to install [zap](https://zap.fuz.dev), then runs their own zap config
 - **Network fetch** — scripts fetched via wget from GitHub raw URLs with SHA256 verification
 - **Firewall on by default** — nftables deny-inbound, allow established/related + loopback + ICMP
