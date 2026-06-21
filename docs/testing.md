@@ -200,8 +200,8 @@ firefox --version
 
 # Check the new tab page (open a new tab)
 # Should show: search and shortcuts (3 rows) plus bookmarks (up to 4 rows) under Recent activity
-# Off by default but user-toggleable: weather, widgets (lists/timer), "Support Firefox" messages
-# Force-disabled (locked): sponsored shortcuts, sponsored stories, recommended stories (Pocket)
+# Off by default but user-toggleable: widgets (lists/timer), "Support Firefox" messages
+# Force-disabled (locked): weather, sponsored shortcuts, sponsored stories, recommended stories (Pocket)
 # Recent activity shows bookmarks only — no visited pages or downloads
 ```
 

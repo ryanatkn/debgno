@@ -93,14 +93,22 @@ export const generate_policies_json = (): string =>
 						install_url:
 							'https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi',
 					},
+					// Amazon and eBay are revenue-partner search engines that resist
+					// SearchEngines.Remove, so also block them as add-ons (mkaply's documented
+					// workaround). Exact ids shifted with the search-config-v2 migration, so a
+					// couple of likely forms are listed; unknown ids are ignored
+					'amazondotcom-us@search.mozilla.org': {installation_mode: 'blocked'},
+					'amazondotcom@search.mozilla.org': {installation_mode: 'blocked'},
+					'ebay@search.mozilla.org': {installation_mode: 'blocked'},
 				},
 				Preferences: {
 					'browser.ml.enable': {Value: false, Status: 'default'},
-					// new tab content — off by default but left user-toggleable, not forced:
-					// weather (showWeather is version-independent, unlike the FirefoxHome.Weather
-					// policy key which is Firefox 152+ only), widgets (lists/timer/clock), and
-					// snippets/"Support Firefox" messages
-					'browser.newtabpage.activity-stream.showWeather': {Value: false, Status: 'default'},
+					// weather: locked off. Status:'default' didn't stick — the activity-stream
+					// feature keeps its own baked default and re-checks the toggle — so it has
+					// to be forced to honor "uncheck weather"
+					'browser.newtabpage.activity-stream.showWeather': {Value: false, Status: 'locked'},
+					// other new tab content off by default but left user-toggleable, not
+					// forced: widgets (lists/timer/clock) and snippets/"Support Firefox" messages
 					'browser.newtabpage.activity-stream.widgets.system.enabled': {
 						Value: false,
 						Status: 'default',

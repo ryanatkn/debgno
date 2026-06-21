@@ -100,7 +100,7 @@ Policies enforced via `/etc/firefox/policies/policies.json`:
 - Breached password alerts disabled (avoids cloud password checks)
 - Default search engine set to DuckDuckGo; Google, Amazon, Bing, eBay, and Perplexity removed (DuckDuckGo and Wikipedia kept)
 - uBlock Origin auto-installed via extension policy
-- New tab page: search and shortcuts (3 rows) on by default; weather, widgets (lists/timer), and "Support Firefox" messages off by default — all user-toggleable. Sponsored shortcuts/stories and recommended stories (Pocket) stay locked off. Recent activity limited to bookmarks (4 rows), no visited pages or downloads
+- New tab page: search and shortcuts (3 rows) on by default; widgets (lists/timer) and "Support Firefox" messages off by default and user-toggleable; weather locked off (its toggle ignores a soft default). Sponsored shortcuts/stories and recommended stories (Pocket) stay locked off. Recent activity limited to bookmarks (4 rows), no visited pages or downloads
 
 ### DNS-over-TLS (System-Wide)
 
