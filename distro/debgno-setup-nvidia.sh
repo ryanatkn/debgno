@@ -57,6 +57,12 @@ echo "=== Installing NVIDIA open kernel module driver ==="
 # --- 4b. Install kernel headers + NVIDIA packages ---
 # Headers are required for DKMS to build the nvidia kernel module.
 #
+# linux-headers-amd64 is the metapackage, deliberately not linux-headers-$(uname -r).
+# DKMS rebuilds the module from a hook on the headers package, so headers must track
+# each new kernel. Pinning to the kernel running at install time means later kernel
+# updates land an image with no module behind it — the old kernel still boots, the new
+# one hangs before the display manager, and it recurs on every update.
+#
 # nvidia-open-kernel-dkms builds NVIDIA's official open-source GPU kernel modules
 # (github.com/NVIDIA/open-gpu-kernel-modules) instead of the proprietary module. It
 # satisfies nvidia-driver's kernel-module dependency via the nvidia-open-kernel-*
@@ -73,7 +79,7 @@ echo "=== Installing NVIDIA open kernel module driver ==="
 
 apt-get update
 apt-get install -y \
-    linux-headers-$(uname -r) \
+    linux-headers-amd64 \
     nvidia-driver \
     nvidia-open-kernel-dkms \
     nvidia-vaapi-driver \
