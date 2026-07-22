@@ -1,4 +1,4 @@
-import {DOWNLOAD_FILES, type FileHashes} from './config.ts';
+import { DOWNLOAD_FILES, type FileHashes } from './config.ts';
 
 export interface PreseedConfig {
 	base_url: string;
@@ -10,9 +10,9 @@ const generate_late_command = (config: PreseedConfig): string => {
 	const dirs = [
 		...new Set(
 			DOWNLOAD_FILES.map((f) => f.dest.replace(/\/[^/]+$/, '')).filter(
-				(d) => d !== '/target/tmp' && d !== '/target/usr/local/bin',
-			),
-		),
+				(d) => d !== '/target/tmp' && d !== '/target/usr/local/bin'
+			)
+		)
 	];
 	const mkdirs = dirs.map((d) => `    mkdir -p ${d};`).join(' \\\n');
 
@@ -20,7 +20,7 @@ const generate_late_command = (config: PreseedConfig): string => {
 	const downloads = DOWNLOAD_FILES.map(
 		(f) =>
 			`    wget -O ${f.dest} ${config.base_url}/${f.name} || { echo "FATAL: failed to download ${f.name}"; exit 1; }; \\\n` +
-			`    echo "${config.hashes[f.name]}  ${f.dest}" | sha256sum -c - || { echo "FATAL: SHA256 mismatch for ${f.name}"; exit 1; };`,
+			`    echo "${config.hashes[f.name]}  ${f.dest}" | sha256sum -c - || { echo "FATAL: SHA256 mismatch for ${f.name}"; exit 1; };`
 	).join(' \\\n');
 
 	// chmod +x for executable files.
@@ -37,7 +37,7 @@ const generate_late_command = (config: PreseedConfig): string => {
 };
 
 export const generate_preseed = (
-	config: PreseedConfig,
+	config: PreseedConfig
 ): string => `# preseed.cfg — Debian 13 (Trixie) minimal GNOME installer
 #
 # Usage: Boot netinst ISO, press 'e' at GRUB, add to linux line:

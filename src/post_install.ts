@@ -1,11 +1,11 @@
-import type {DebgnoConfig} from './config.ts';
+import type { DebgnoConfig } from './config.ts';
 import {
 	PACKAGES,
 	STAGING_DIR,
 	POST_INSTALL_LOG,
 	POST_INSTALL_MARKER,
 	MOZILLA_KEY_PATH,
-	FIREFOX_POLICIES_PATH,
+	FIREFOX_POLICIES_PATH
 } from './config.ts';
 
 const format_install_packages = (packages: Array<string>): string =>

@@ -1,4 +1,4 @@
-import type {DebgnoConfig} from './config.ts';
+import type { DebgnoConfig } from './config.ts';
 import {
 	PACKAGES,
 	VERIFY_EXTRA_PACKAGES,
@@ -6,7 +6,7 @@ import {
 	POST_INSTALL_LOG,
 	POST_INSTALL_MARKER,
 	MOZILLA_KEY_PATH,
-	FIREFOX_POLICIES_PATH,
+	FIREFOX_POLICIES_PATH
 } from './config.ts';
 
 const format_verify_packages = (packages: Array<string>): string =>

@@ -30,7 +30,7 @@ export const PACKAGES = [
 	'curl',
 	'wget',
 	'ca-certificates',
-	'openssh-client',
+	'openssh-client'
 ];
 
 // Expected dependencies not explicitly installed but verified.
@@ -56,7 +56,7 @@ export const UNWANTED_PACKAGES = [
 	'evolution',
 	'tracker-miner-fs',
 	'flatpak',
-	'snapd',
+	'snapd'
 ];
 
 // Staging directory for files fetched by late_command (used by post-install.sh, cleaned up after).
@@ -77,21 +77,21 @@ export interface DownloadFile {
 }
 
 export const DOWNLOAD_FILES: Array<DownloadFile> = [
-	{name: 'post-install.sh', dest: '/target/tmp/post-install.sh', executable: true},
+	{ name: 'post-install.sh', dest: '/target/tmp/post-install.sh', executable: true },
 	{
 		name: 'debgno-setup-nvidia.sh',
 		dest: '/target/usr/local/bin/debgno-setup-nvidia.sh',
-		executable: true,
+		executable: true
 	},
 	{
 		name: 'debgno-setup-zap.sh',
 		dest: '/target/usr/local/bin/debgno-setup-zap.sh',
-		executable: true,
+		executable: true
 	},
-	{name: 'debgno-verify.sh', dest: '/target/usr/local/bin/debgno-verify.sh', executable: true},
-	{name: 'mozilla.sources', dest: `/target${STAGING_DIR}/mozilla.sources`, executable: false},
-	{name: 'mozilla-pin', dest: `/target${STAGING_DIR}/mozilla-pin`, executable: false},
-	{name: 'policies.json', dest: `/target${STAGING_DIR}/policies.json`, executable: false},
+	{ name: 'debgno-verify.sh', dest: '/target/usr/local/bin/debgno-verify.sh', executable: true },
+	{ name: 'mozilla.sources', dest: `/target${STAGING_DIR}/mozilla.sources`, executable: false },
+	{ name: 'mozilla-pin', dest: `/target${STAGING_DIR}/mozilla-pin`, executable: false },
+	{ name: 'policies.json', dest: `/target${STAGING_DIR}/policies.json`, executable: false }
 ];
 
 export type FileHashes = Record<string, string>;
