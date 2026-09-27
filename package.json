@@ -15,11 +15,5 @@
 		"@fuzdev/fuz_util": "^0.69.0",
 		"@fuzdev/gro": "^0.212.0",
 		"typescript": "^5.9.3"
-	},
-	"prettier": {
-		"useTabs": true,
-		"printWidth": 100,
-		"singleQuote": true,
-		"bracketSpacing": false
 	}
 }
