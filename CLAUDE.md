@@ -4,11 +4,6 @@
 
 - every package is an explicit choice
 
-## Committing
-
-`git add` and `git commit` are denied by `.claude/settings.local.json` in
-this repo — make the edits and stop, the user commits.
-
 ## Architecture
 
 All installer files are generated from TypeScript source:
