@@ -13,7 +13,7 @@
 	},
 	"devDependencies": {
 		"@fuzdev/fuz_util": "^0.69.0",
-		"@fuzdev/gro": "^0.212.0",
+		"@fuzdev/gro": "^0.213.0",
 		"typescript": "^5.9.3"
 	}
 }
