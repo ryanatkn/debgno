@@ -12,7 +12,7 @@
 		"gen": "gro gen"
 	},
 	"devDependencies": {
-		"@fuzdev/fuz_util": "^0.69.0",
+		"@fuzdev/fuz_util": "^0.72.0",
 		"@fuzdev/gro": "^0.216.0",
 		"@types/node": "^24.19.2",
 		"typescript": "^6.0.3"
