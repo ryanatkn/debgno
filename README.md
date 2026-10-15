@@ -170,4 +170,4 @@ See ./docs/testing.md for QEMU testing setup, checklists, and package audit proc
 
 ## License
 
-[MIT](LICENSE)
+[0BSD](LICENSE)
