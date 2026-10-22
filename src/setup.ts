@@ -244,7 +244,7 @@ fi
 
 echo "=== Installing zap ==="
 
-curl -fsSL https://zap.fuz.dev/install.sh | sh
+curl --proto '=https' --tlsv1.2 -fsSL https://zap.fuz.dev/install.sh | sh
 
 echo "=== zap installed ==="
 echo ""
