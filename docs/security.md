@@ -174,10 +174,11 @@ possible but adds friction to every boot and recovery scenario.
 
 ### zap Installer
 
-The optional dev environment script (`debgno-setup-zap.sh`) installs [zap](https://zap.fuz.dev)
-via its standard installer. The zap installer verifies its own binary hash after download.
-This is the standard vendor-trust model (like `apt` trusting Debian's repos) and is
-user-initiated — not part of the base install. This requires trusting zap.fuz.dev to run arbitrary code.
+The optional dev environment script (`debgno-setup-zap.sh`) builds [zap](https://zap.fuz.dev)
+from source: it clones `fuzdev/fuz` and `fuzdev/zap` from GitHub at their default branch and
+runs `cargo xtask install`. This trusts those two repos, rustup, and crates.io (pinned by
+`Cargo.lock`), with no hash check beyond Cargo's. It is user-initiated — not part of the base
+install. An existing checkout is built as it stands, without pulling.
 
 ### WiFi Firmware
 

@@ -85,13 +85,13 @@ recover and re-run with: `sudo debgno-setup-nvidia.sh --late-modeset`
 
 **Hybrid laptops (Intel + NVIDIA):** The script works the same way. After reboot, the Intel iGPU renders the desktop and NVIDIA activates on demand. Right-click an app in GNOME to "Launch with Discrete GPU."
 
-**For dev environment setup** (install [zap](https://zap.fuz.dev)):
+**For dev environment setup** (build [zap](https://zap.fuz.dev) from source, [fuzdev/zap](https://github.com/fuzdev/zap)):
 
 ```bash
 debgno-setup-zap.sh
 ```
 
-Then run your own zap config to provision your environment.
+Then build `fgro` (the script prints the link) and run your own zap config to provision your environment.
 
 ## What's Installed
 
@@ -165,7 +165,7 @@ See ./docs/testing.md for QEMU testing setup, checklists, and package audit proc
 | `distro/preseed.cfg`            | Generated: installer automation with SHA256 verification     |
 | `distro/post-install.sh`        | Generated: base system setup (GNOME, Firefox, audio, config) |
 | `distro/debgno-setup-nvidia.sh` | Generated: optional NVIDIA driver + Wayland config           |
-| `distro/debgno-setup-zap.sh`    | Generated: optional [zap](https://zap.fuz.dev) install       |
+| `distro/debgno-setup-zap.sh`    | Generated: optional [zap](https://zap.fuz.dev) source build  |
 | `distro/debgno-verify.sh`       | Generated: automated post-install verification               |
 
 ## License

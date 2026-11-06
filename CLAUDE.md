@@ -27,7 +27,7 @@ distro/
 ├── preseed-local.cfg    # Local testing variant (10.0.2.2:8000 URLs, gitignored)
 ├── post-install.sh      # Base system setup (fetched via network during install)
 ├── debgno-setup-nvidia.sh # Optional NVIDIA driver setup (user runs post-install)
-├── debgno-setup-zap.sh     # Optional zap install for dev environment provisioning
+├── debgno-setup-zap.sh     # Optional zap source build for dev environment provisioning
 ├── debgno-verify.sh       # Automated post-install verification
 ├── mozilla.sources      # deb822 APT source for Mozilla
 ├── mozilla-pin          # APT pin for Firefox packages
@@ -140,7 +140,7 @@ To add a package: add it to `PACKAGES` in `src/config.ts` and run `gro gen`.
 - **Trixie (Debian 13, stable release)** — gets security updates, 5-year support
 - **Base install = mesa/nouveau** — works on Intel/AMD/NVIDIA
 - **NVIDIA open kernel module = optional** — user runs `debgno-setup-nvidia.sh` after first boot (installs `nvidia-open-kernel-dkms`; Turing or newer GPUs only)
-- **Dev environment = optional** — user runs `debgno-setup-zap.sh` to install [zap](https://zap.fuz.dev), then runs their own zap config
+- **Dev environment = optional** — user runs `debgno-setup-zap.sh` to build [zap](https://zap.fuz.dev) from source (`fuzdev/zap`, beside `fuzdev/fuz`), then builds `fgro` and runs their own zap config
 - **Network fetch** — scripts fetched via wget from GitHub raw URLs with SHA256 verification
 - **Firewall on by default** — nftables deny-inbound, allow established/related + loopback + ICMP
 
